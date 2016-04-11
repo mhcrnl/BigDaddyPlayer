@@ -14,7 +14,7 @@ public class OpenVideo {
     public void OpenWebsite(String Sitename){
         try{
             Process P;
-            P = Runtime.getRuntime().exec("/bin/bash firefox https://youtube.com/"+Sitename);
+            P = Runtime.getRuntime().exec("/bin/bash firefox https://www.youtube.com/results?search_query="+Sitename+"");
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null,"Error unable to open site");

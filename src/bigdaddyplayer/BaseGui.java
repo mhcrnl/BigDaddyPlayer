@@ -20,13 +20,19 @@ import javax.swing.JFileChooser;
 public class BaseGui extends javax.swing.JFrame {
         int xMouse;
         int yMouse;
-    private int count;
+        private int plselection;
+        int vrow;
+        private int count;
     private int testc=0;
+    private String PlaylistN;
     private String path,filename = "";
     //filename = " ";
-       
+    DbSave SaveDet = new DbSave();
+    String[][] data1 = new String[100][100];
     PlayMusic play = new PlayMusic();
     OpenVideo vid = new OpenVideo();
+    String[] data  = new String[7];
+    String[] plist = new String[100];
     public BaseGui() {
         
         this.count = 1;
@@ -43,20 +49,57 @@ public class BaseGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel4 = new javax.swing.JPanel();
+        Rdetail = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jTextField1 = new javax.swing.JTextField();
+        sname = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        sartist = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        salbum = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        RateBar = new javax.swing.JProgressBar();
+        srating = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        sgenre = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        scomment = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        Rplaylist = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        Rshared = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         SongDisplay = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         visual = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel13 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -65,6 +108,267 @@ public class BaseGui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setLayout(new java.awt.CardLayout());
+
+        Rdetail.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setBackground(new java.awt.Color(204, 0, 204));
+        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel3.setText("Current Song Details");
+        jLabel3.setToolTipText("");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel3.setOpaque(true);
+        Rdetail.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 240, 40));
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        Rdetail.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 40, 10, 440));
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField1.setText("Name of Song");
+        Rdetail.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 110, 30));
+
+        sname.setEditable(false);
+        sname.setBackground(java.awt.Color.lightGray);
+        sname.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        sname.setForeground(new java.awt.Color(0, 0, 0));
+        sname.setText("Add Song");
+        sname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                snameActionPerformed(evt);
+            }
+        });
+        Rdetail.add(sname, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 170, 40));
+
+        jTextField3.setEditable(false);
+        jTextField3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField3.setText("Artist");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        Rdetail.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 110, 30));
+
+        sartist.setEditable(false);
+        sartist.setBackground(java.awt.Color.lightGray);
+        sartist.setForeground(new java.awt.Color(0, 0, 0));
+        Rdetail.add(sartist, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 170, 40));
+
+        jTextField5.setEditable(false);
+        jTextField5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField5.setText("Album");
+        Rdetail.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 110, 30));
+
+        salbum.setEditable(false);
+        salbum.setBackground(java.awt.Color.lightGray);
+        salbum.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        salbum.setForeground(new java.awt.Color(0, 0, 0));
+        Rdetail.add(salbum, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 170, 40));
+
+        jTextField7.setEditable(false);
+        jTextField7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField7.setText("Rating");
+        Rdetail.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 110, 30));
+
+        RateBar.setForeground(new java.awt.Color(255, 51, 255));
+        Rdetail.add(RateBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 220, 20));
+
+        srating.setEditable(false);
+        srating.setBackground(java.awt.Color.lightGray);
+        srating.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        srating.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        srating.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sratingActionPerformed(evt);
+            }
+        });
+        Rdetail.add(srating, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 100, 40));
+
+        jTextField9.setEditable(false);
+        jTextField9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField9.setText("Genre");
+        Rdetail.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 110, 30));
+
+        sgenre.setEditable(false);
+        sgenre.setBackground(java.awt.Color.lightGray);
+        sgenre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        sgenre.setForeground(new java.awt.Color(0, 0, 0));
+        Rdetail.add(sgenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 110, 40));
+
+        jTextField11.setEditable(false);
+        jTextField11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextField11.setText("Comment");
+        Rdetail.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 110, 30));
+
+        scomment.setEditable(false);
+        scomment.setBackground(java.awt.Color.lightGray);
+        scomment.setColumns(20);
+        scomment.setForeground(new java.awt.Color(0, 0, 0));
+        scomment.setRows(5);
+        jScrollPane1.setViewportView(scomment);
+
+        Rdetail.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/tumblr_n34s6gkykD1soyp8ao1_500.gif"))); // NOI18N
+        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.gray, java.awt.Color.gray));
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Rdetail.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 310, 270));
+
+        jPanel4.add(Rdetail, "card5");
+
+        Rplaylist.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setText("Select Playlist");
+        Rplaylist.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 103, 57));
+
+        jComboBox1.setEditable(true);
+        Rplaylist.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 190, 40));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Playlist Name "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("");
+        jTable1.setMinimumSize(new java.awt.Dimension(30, 160));
+        jTable1.setName(""); // NOI18N
+        jTable1.setRowHeight(30);
+        jScrollPane2.setViewportView(jTable1);
+
+        Rplaylist.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 310, 290));
+
+        jButton11.setText("Get Songs");
+        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton11MouseClicked(evt);
+            }
+        });
+        Rplaylist.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
+
+        jButton12.setText("Play");
+        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton12MouseClicked(evt);
+            }
+        });
+        Rplaylist.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 130, 50));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/pls.png"))); // NOI18N
+        Rplaylist.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 250, 280));
+
+        jPanel4.add(Rplaylist, "card4");
+
+        javax.swing.GroupLayout RsharedLayout = new javax.swing.GroupLayout(Rshared);
+        Rshared.setLayout(RsharedLayout);
+        RsharedLayout.setHorizontalGroup(
+            RsharedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+        );
+        RsharedLayout.setVerticalGroup(
+            RsharedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(Rshared, "card3");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel5, "card2");
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, 620, 480));
+
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/rightB.png"))); // NOI18N
+        jButton6.setText("Search");
+        jButton6.setContentAreaFilled(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 50));
+
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/rightB.png"))); // NOI18N
+        jButton7.setText("Detail");
+        jButton7.setContentAreaFilled(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 140, 50));
+
+        jButton8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/rightB.png"))); // NOI18N
+        jButton8.setText("Playlist");
+        jButton8.setContentAreaFilled(false);
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 140, 50));
+
+        jButton9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/rightB.png"))); // NOI18N
+        jButton9.setText("Shared");
+        jButton9.setContentAreaFilled(false);
+        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 140, 50));
+
+        jButton10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/rightB.png"))); // NOI18N
+        jButton10.setText("Search");
+        jButton10.setContentAreaFilled(false);
+        jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 140, 50));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 790, 50));
 
         SongDisplay.setEditable(false);
         SongDisplay.setBackground(new java.awt.Color(204, 255, 0));
@@ -77,105 +381,100 @@ public class BaseGui extends javax.swing.JFrame {
                 SongDisplayActionPerformed(evt);
             }
         });
-        getContentPane().add(SongDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 490, 40));
+        getContentPane().add(SongDisplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 490, 50));
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), new java.awt.Color(153, 153, 153)), null));
-        jPanel2.setOpaque(false);
+        jPanel2.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.disabledText"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 255, 255));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Open");
-        jTextField1.setBorder(null);
-        jTextField1.setOpaque(false);
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(204, 204, 204));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/side2.png"))); // NOI18N
+        jButton5.setText("Set Details");
+        jButton5.setContentAreaFilled(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextField1MouseExited(evt);
+                jButton5MouseClicked(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 140, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, 70));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(0, 204, 255));
-        jTextField2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 204, 204));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("Get Video");
-        jTextField2.setBorder(null);
-        jTextField2.setOpaque(false);
-        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/side2.png"))); // NOI18N
+        jButton1.setText("Open");
+        jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jButton1.setContentAreaFilled(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField2MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextField2MouseExited(evt);
+                jButton1MouseClicked(evt);
             }
         });
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, 50));
-
-        jTextField3.setEditable(false);
-        jTextField3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 204, 204));
-        jTextField3.setText("Set Details");
-        jTextField3.setToolTipText("");
-        jTextField3.setBorder(null);
-        jTextField3.setOpaque(false);
-        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField3MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jTextField3MouseExited(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 100, 50));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 70));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"))); // NOI18N
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(204, 204, 204));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/side2.png"))); // NOI18N
+        jButton2.setText("Get Video");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel10MouseExited(evt);
+                jButton2MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 150, 50));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel7MouseExited(evt);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 150, 50));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 70));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel3MouseReleased(evt);
-            }
+        jSeparator1.setBackground(new java.awt.Color(0, 255, 255));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(50, 20));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 242, 170, 20));
+
+        jButton3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(204, 204, 204));
+        jButton3.setIcon(new javax.swing.ImageIcon("/root/java/new button icon/as/side2.png")); // NOI18N
+        jButton3.setText("Playlist");
+        jButton3.setContentAreaFilled(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel3MouseExited(evt);
+                jButton3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 150, 50));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 170, 70));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 170, 800));
+        jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(204, 204, 204));
+        jButton4.setIcon(new javax.swing.ImageIcon("/root/java/new button icon/as/side2.png")); // NOI18N
+        jButton4.setText("Sharing");
+        jButton4.setContentAreaFilled(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 170, 70));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 51));
+        jLabel12.setIcon(new javax.swing.ImageIcon("/root/java/new button icon/Grey_Wallpaper_by_w_brennan.png")); // NOI18N
+        jLabel12.setText("jLabel12");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 800));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 170, 800));
+
+        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.disabledText"));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 10, 8, new java.awt.Color(153, 153, 153)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/b.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,6 +482,7 @@ public class BaseGui extends javax.swing.JFrame {
                 jLabel2MouseClicked(evt);
             }
         });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 195, 125, 137));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/b1.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,6 +493,7 @@ public class BaseGui extends javax.swing.JFrame {
                 jLabel4MouseExited(evt);
             }
         });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 195, 150, 137));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/b2.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,44 +504,18 @@ public class BaseGui extends javax.swing.JFrame {
                 jLabel5MouseExited(evt);
             }
         });
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 195, 134, 137));
 
         visual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/editabe.png"))); // NOI18N
+        jPanel1.add(visual, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, -1));
 
         jProgressBar1.setValue(6);
+        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 175, 457, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(visual, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(visual, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jLabel13.setIcon(new javax.swing.ImageIcon("/root/java/new button icon/dark-material-design-hd-wallpaper.jpg")); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 350));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 490, 350));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 490, 350));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/menubar/images3.png"))); // NOI18N
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -327,12 +602,43 @@ public class BaseGui extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/b21.png"));
         jLabel5.setIcon(II);
+        if (plselection == 1){
+        int new_row  = vrow-1;
+        play.stop();
+        path = data1[new_row][0];
+            try {
+                play.play(path);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(BaseGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            filename = data1[new_row][1];
+            SongDisplay.setText("Playing "+filename);
+        }
+        else if (plselection == 0){
+            
+            
+        }
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-       ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/b12.png"));
+        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/b12.png"));
         jLabel4.setIcon(II);
-        
+        if (plselection == 1){
+        int new_row  = vrow+1;
+        play.stop();
+        path = data1[new_row][0];
+            try {
+                play.play(path);
+            } catch (FileNotFoundException ex) {
+                
+            }
+            filename = data1[new_row][1];
+            SongDisplay.setText("Playing "+filename);
+        }
+        else if (plselection == 0){
+            
+            
+        }
         /*try {
             Thread.sleep(450);
             ImageIcon II2 = new ImageIcon(getClass().getResource("b1.png"));
@@ -378,87 +684,182 @@ public class BaseGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SongDisplayActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-        jLabel3.setIcon(II);
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jLabel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseReleased
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel3.setIcon(II);
-    }//GEN-LAST:event_jLabel3MouseReleased
-
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel3.setIcon(II);
-    }//GEN-LAST:event_jLabel3MouseExited
-
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-        jLabel3.setIcon(II);
-        JFileChooser chooser = new JFileChooser();
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION)
         {
             File myfile=chooser.getSelectedFile();
             path = myfile + "";
             filename  = chooser.getSelectedFile().getName();
+            SaveDet.set_detail(path);
+            System.out.println(filename);
             //System.out.println(text);
             SongDisplay.setText("Song Added");
             play.stop();
+            testc = 0;
+            count = 1;
+            ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/b.png"));
+            jLabel2.setIcon(II);
+            //SongDisplay.setText("Paused");
+            ImageIcon II123 = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/editabe.png"));
+            visual.setIcon(II123);
+            
+            
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+       vid.OpenWebsite(filename);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        new SetDetail(path).setVisible(true);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        new PlaylistGUI().setVisible(true);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void snameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_snameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_snameActionPerformed
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        jPanel4.removeAll();
+        jPanel4.repaint();
+        jPanel4.revalidate();
+        //adding Rdetail
+        jPanel4.add(Rdetail);
+        jPanel4.repaint();
+        jPanel4.revalidate();
+        
+        
+        data = SaveDet.showDet(path);
+        sname.setText(data[1]);
+        sartist.setText(data[2]);
+        salbum.setText(data[3]);
+        srating.setText(data[4]);
+        if (null != data[4])switch (data[4]) {
+                case "1":
+                    RateBar.setValue(20);
+                    break;
+                case "2":
+                    RateBar.setValue(40);
+                    break;
+                case "3":
+                    RateBar.setValue(60);
+                    break;
+                case "4":
+                    RateBar.setValue(80);
+                    break;
+                case "5":
+                    RateBar.setValue(100);
+                    break;
+                default:
+                    break;
+            }
+        
+        sgenre.setText(data[5]);
+        scomment.setText(data[6]);
+        
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void sratingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sratingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sratingActionPerformed
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        jPanel4.removeAll();
+        jPanel4.repaint();
+        jPanel4.revalidate();
+        //adding Rdetail
+        jPanel4.add(Rplaylist);
+        jPanel4.repaint();
+        jPanel4.revalidate();
+        
+        plist = SaveDet.get_pname();
+        int i=0;
+        jComboBox1.removeAllItems();
+        while (plist[i] != "eof"){
+            jComboBox1.addItem(plist[i]);
+            i=i+1;
+        }
+        //scrollPane1.setName("new");
+        
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+        jPanel4.removeAll();
+        jPanel4.repaint();
+        jPanel4.revalidate();
+        //adding Rdetail
+        jPanel4.add(Rshared);
+        jPanel4.repaint();
+        jPanel4.revalidate();
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
+        PlaylistN = jComboBox1.getSelectedItem() + "";
+        
+        data1 = SaveDet.get_psong(PlaylistN);
+        System.out.println(data1[1][1]);
+        String[] columnNames = new String[] { PlaylistN };
+        String[][] rows = new String [100][100];
+        int i=0;
+        while (data1[i][0] != "eof"){
+            
+            
+            //if ( data1[i][1] != null ){
+            //rows[i][0] = data1[i][1];
+            //System.out.println("going");
+            //}
+            //else{
+                rows[i][0] = data1[i][0];
+            //}
+            i= i + 1;
         }
         
-    }//GEN-LAST:event_jTextField1MouseClicked
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(rows,columnNames));
+        
+    }//GEN-LAST:event_jButton11MouseClicked
 
-    private void jTextField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseExited
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel3.setIcon(II);
-    }//GEN-LAST:event_jTextField1MouseExited
-
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-       ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-       jLabel7.setIcon(II);
-       vid.OpenWebsite(filename);
-       
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
-       ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-       jLabel7.setIcon(II);
-       vid.OpenWebsite(filename);
-    }//GEN-LAST:event_jTextField2MouseClicked
-
-    private void jTextField2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseExited
-       ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-       jLabel7.setIcon(II);
-    }//GEN-LAST:event_jTextField2MouseExited
-
-    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel7.setIcon(II);
-    }//GEN-LAST:event_jLabel7MouseExited
-
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-        jLabel10.setIcon(II);
-    }//GEN-LAST:event_jLabel10MouseClicked
-
-    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button3.png"));
-        jLabel10.setIcon(II);
-    }//GEN-LAST:event_jTextField3MouseClicked
-
-    private void jTextField3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseExited
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel10.setIcon(II);
-        //DetailSet det = new DetailSet();
-        //new DetailSet.setVisible(true);
-    }//GEN-LAST:event_jTextField3MouseExited
-
-    private void jLabel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseExited
-        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/button1.png"));
-        jLabel10.setIcon(II);
-    }//GEN-LAST:event_jLabel10MouseExited
+    private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
+        plselection = 1;
+        vrow = jTable1.getSelectedRow();
+        String Song2p = data1[vrow][0];
+        path = Song2p;
+        SongDisplay.setText("Song Added");
+        play.stop();
+        testc = 0;
+        count = 1;
+        ImageIcon II = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/b.png"));
+        jLabel2.setIcon(II);
+        filename = path;
+            //SongDisplay.setText("Paused");
+        ImageIcon II123 = new ImageIcon(getClass().getResource("/bigdaddyplayer/images/editabe.png"));
+        visual.setIcon(II123);
+    }//GEN-LAST:event_jButton12MouseClicked
 
     /**
      * @param args the command line arguments
@@ -466,9 +867,29 @@ public class BaseGui extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar RateBar;
+    private javax.swing.JPanel Rdetail;
+    private javax.swing.JPanel Rplaylist;
+    private javax.swing.JPanel Rshared;
     private javax.swing.JTextField SongDisplay;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -479,10 +900,27 @@ public class BaseGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField salbum;
+    private javax.swing.JTextField sartist;
+    private javax.swing.JTextArea scomment;
+    private javax.swing.JTextField sgenre;
+    private javax.swing.JTextField sname;
+    private javax.swing.JTextField srating;
     private javax.swing.JLabel visual;
     // End of variables declaration//GEN-END:variables
 }

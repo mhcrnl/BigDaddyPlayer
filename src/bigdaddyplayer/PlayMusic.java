@@ -40,7 +40,7 @@ public class PlayMusic{
         try {
             FIS.skip(SongLength-PauseFrame);
         } catch (IOException ex) {
-            Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
