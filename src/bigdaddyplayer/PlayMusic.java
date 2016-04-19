@@ -13,7 +13,7 @@ import javazoom.jl.player.Player;
 
 
 
-public class PlayMusic{
+public class PlayMusic implements Playing {
     FileInputStream FIS;
     BufferedInputStream BIS;
     
@@ -21,6 +21,9 @@ public class PlayMusic{
     public long PauseFrame;
     public long SongLength;
     public String FileLocation;
+    
+    
+    
     public void stop(){
         if (player != null){
             
@@ -30,45 +33,65 @@ public class PlayMusic{
         }
     }
     
-    public void Pause() throws IOException{
-        PauseFrame = FIS.available();
-        player.close();
-    }
-    public void Resume() throws FileNotFoundException{
-        FIS = new FileInputStream(FileLocation);
-        BIS = new BufferedInputStream(FIS);
+    public void Pause(){
         try {
-            FIS.skip(SongLength-PauseFrame);
+            if (player == null){
+                return;
+            }
+            PauseFrame = FIS.available();
+            player.close();
         } catch (IOException ex) {
+            Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void Resume(){
+        try {
+            FIS = new FileInputStream(FileLocation);
+            BIS = new BufferedInputStream(FIS);
+            if (player == null){
+                return;
+            }
+            try {
+                FIS.skip(SongLength-PauseFrame);
+            } catch (IOException ex) {
+                //Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                player = new Player(BIS);
+            } catch (JavaLayerException ex) {
+                
+            }
+            new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        player.play();
+                    } catch (JavaLayerException ex) {
+                        
+                    }
+                }
+            }.start();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
             //Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        try {
-            player = new Player(BIS);
-        } catch (JavaLayerException ex) {
-          
-        }
-        new Thread(){
-            @Override
-            public void run(){
-                try {
-                    player.play();
-                } catch (JavaLayerException ex) {
-                    
-                }
-            }
-        }.start();
     }
     
     
     
-    public void play(String path) throws FileNotFoundException{
-        FIS = new FileInputStream(path);
+    public void play(String path){
+        try {
+            FIS = new FileInputStream(path);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PlayMusic.class.getName()).log(Level.SEVERE, null, ex);
+        }
         BIS = new BufferedInputStream(FIS);
         
         try {
             player = new Player(BIS);
             SongLength= FIS.available();
+            //System.out.println(SongLength);
             FileLocation = path + "";
         } catch (JavaLayerException ex) {
             
@@ -86,6 +109,8 @@ public class PlayMusic{
             }
         }.start();
     }
+
+    
     
     
 }

@@ -17,6 +17,7 @@ public class SetDetail extends javax.swing.JFrame {
     boolean sharing;
     /**
      * Creates new form SetDetail
+     * @param loc
      */
     public SetDetail(String loc) {
         initComponents();
@@ -55,7 +56,8 @@ public class SetDetail extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Name");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 97, 34));
 
@@ -66,7 +68,8 @@ public class SetDetail extends javax.swing.JFrame {
         });
         getContentPane().add(tname, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 37, 190, 38));
 
-        jLabel2.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Artist");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 97, -1));
 
@@ -77,7 +80,8 @@ public class SetDetail extends javax.swing.JFrame {
         });
         getContentPane().add(tartist, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 81, 190, 42));
 
-        jLabel3.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Album");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 91, 32));
 
@@ -88,14 +92,16 @@ public class SetDetail extends javax.swing.JFrame {
         });
         getContentPane().add(talbum, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 129, 190, 42));
 
-        jLabel4.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Rating");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 48, 31));
 
         tratting.setModel(new javax.swing.SpinnerNumberModel(1, 1, 5, 1));
         getContentPane().add(tratting, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 217, 58, -1));
 
-        jLabel5.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
         jLabel5.setText("Genre");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 212, 46, 31));
 
@@ -106,7 +112,8 @@ public class SetDetail extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 261, 263, 146));
 
-        jLabel6.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 102, 102));
         jLabel6.setText("Comment");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 70, 34));
 
@@ -118,12 +125,13 @@ public class SetDetail extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 425, -1, -1));
 
-        tsharing.setForeground(new java.awt.Color(0, 255, 255));
+        tsharing.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        tsharing.setForeground(new java.awt.Color(0, 102, 102));
         tsharing.setText("Sharing");
         tsharing.setOpaque(false);
         getContentPane().add(tsharing, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 215, -1, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/blue-mac-gaussian-blur-wallpaper-1.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/background_white_by_themrsnowman13-d4h17rj.png"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 510));
 
         pack();
@@ -150,6 +158,7 @@ public class SetDetail extends javax.swing.JFrame {
         sharing = tsharing.isEnabled();
         comment = tcomment.getText() + "";
         System.out.println(sharing);
+        
         SaveDet.set_detail(location, name, artist, album, rating, genre, comment);
         
     }//GEN-LAST:event_jButton1MouseClicked

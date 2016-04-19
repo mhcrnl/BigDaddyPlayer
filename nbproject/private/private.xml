@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/Inputs.java</file>
+            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/OnlinePlay.java</file>
             <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/BaseGui.java</file>
-            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/BigDaddyPlayer.java</file>
-            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/DbSave.java</file>
-            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/SetDetail.java</file>
+            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/Playing.java</file>
             <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/PlayMusic.java</file>
-            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/OpenVideo.java</file>
-            <file>file:/root/NetBeansProjects/BigDaddyPlayer/src/bigdaddyplayer/PlaylistGUI.java</file>
         </group>
     </open-files>
 </project-private>

@@ -19,7 +19,9 @@ public class DbSave {
         static final String USER = "root";
         static final String PASS = "root";
         
-    public void set_detail(String location,String name,String artist,String album,int rating,String genre,String comments){      
+    
+    
+     public void set_detail(String location,String name,String artist,String album,int rating,String genre,String comments){      
         Connection conn = null;
         Statement stmt = null;
         
@@ -79,8 +81,6 @@ public class DbSave {
                 System.out.println("Goodbye!");
             }//end main
             //end FirstExample
-    
-    
     public void set_detail(String location){      
             Connection conn = null;
             Statement stmt = null;
@@ -141,6 +141,7 @@ public class DbSave {
                 System.out.println("Goodbye!");
             }//end main
             //end FirstExample
+    
     
     public String set_Playlist(String loc,String pname){
         Connection conn = null;
@@ -392,7 +393,7 @@ public class DbSave {
             //System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "Select Sname,location from OfPlaylist where PlName='"+plname+"'";
+            sql = "Select SName,location from OfPlaylist where PlName='"+plname+"'";
             ResultSet ret1 = stmt.executeQuery(sql);
             int i=0;
             while(ret1.next()){
@@ -431,10 +432,216 @@ public class DbSave {
     }
     
     
+    public void recent_input(String filename) throws ClassNotFoundException{
+        Connection conn = null;
+        Statement stmt = null;
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "Insert into RecentSong(location) Values('"+filename+"')";
+            Boolean ret = stmt.execute(sql);
+            System.out.println("Return value is : " + ret.toString() );
+            stmt.close();
+            conn.close();
+            }
+            catch(SQLException | ClassNotFoundException se)
+            {
+            }finally{
+            //finally block used to close resources
+            try{
+            if(stmt!=null) {
+                stmt.close();
+            }
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException se){
+            }//end finally try
+            }//end try
+    }
+    
+    public String PrePlay(String cursong){
+        Connection conn = null;
+        Statement stmt = null;
+        int sno = 0;
+        String newloc=null;
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "Select SNo from RecentSong where location='"+cursong+"'";
+            ResultSet ret = stmt.executeQuery(sql);
+            while(ret.next()){
+                sno = ret.getInt("SNo");
+                
+            }
+            int sno1 = sno;
+            if (sno1==1){
+                sno1=sno1;
+            }
+            else{
+            sno1=sno1-1;
+            }
+            sql ="Select location from RecentSong where SNo="+sno1+"";
+            ResultSet ret1 = stmt.executeQuery(sql);
+            while(ret1.next()){
+                newloc = ret1.getString("location");
+                
+            }
+            stmt.close();
+            conn.close();
+            }
+            catch(SQLException | ClassNotFoundException se)
+            {
+            }finally{
+            //finally block used to close resources
+            try{
+            if(stmt!=null) {
+                stmt.close();
+            }
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException se){
+            }//end finally try
+            }//end try
+        return newloc;
+    }
+    public String NextPlay(String cursong){
+        Connection conn = null;
+        Statement stmt = null;
+        int sno = 0;
+        String newloc=null;
+        int lasts = 0;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "Select SNo from RecentSong where location='"+cursong+"'";
+            ResultSet ret = stmt.executeQuery(sql);
+            while(ret.next()){
+                sno = ret.getInt("SNo");
+                
+            }
+            System.out.println(sno);
+            int sno1 = sno;
+            
+            sql = "Select count(SNo) as count from RecentSong";
+            while(ret.next()){
+                lasts = ret.getInt("count");
+                
+            }
+            System.out.println(lasts);
+            Integer lasts1 = lasts;
+            if (lasts1 == sno1){
+            sno1=1;
+            }
+            else{
+                sno1 = sno1+1;
+            }
+            sql ="Select location from RecentSong where SNo="+sno1+"";
+            ResultSet ret1 = stmt.executeQuery(sql);
+            while(ret1.next()){
+                newloc = ret1.getString("location");
+                
+            }
+            stmt.close();
+            conn.close();
+            }
+            catch(SQLException | ClassNotFoundException se)
+            {
+            }finally{
+            //finally block used to close resources
+            try{
+            if(stmt!=null) {
+                stmt.close();
+            }
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException se){
+            }//end finally try
+            }//end try
+        return newloc;
+    }
     
     
+    public String[][] search(String Data){
+        Connection conn = null;
+        Statement stmt = null;
+        String[][] loc = new String[100][100];
+        //String[] nm = new String[100];
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "Select SName,location from OfDetail where SName like '%"+Data+"%'";
+            ResultSet ret1 = stmt.executeQuery(sql);
+            int i=0;
+            while(ret1.next()){
+                loc[i][0] = ret1.getString("location");
+                loc[i][1] = ret1.getString("SName");
+                i = i+1;
+            }
+            loc[i][0] = "eof";
+            loc[i][1] = "eof";
+            
+            
+        }   catch (SQLException ex) {
+                Logger.getLogger(DbSave.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DbSave.class.getName()).log(Level.SEVERE, null, ex);
+            }
     
+    try{
+            if(stmt!=null) {
+                stmt.close();
+            }
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null) {
+                    conn.close();
+                }
+            }catch(SQLException se){
+            }//end finally try
+            //end try
+            return loc;
     
-    
+        
+        
+    }
     
 }

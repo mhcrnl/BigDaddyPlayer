@@ -68,7 +68,7 @@ public class PlaylistGUI extends javax.swing.JFrame {
         });
         jPanel4.add(plname, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 200, 40));
 
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Playlist Name");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, 30));
 
@@ -116,7 +116,7 @@ public class PlaylistGUI extends javax.swing.JFrame {
         jPanel3.setOpaque(false);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Select Playlist");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 90, 40));
 
@@ -181,7 +181,7 @@ public class PlaylistGUI extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/blue-mac-gaussian-blur-wallpaper-1.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bigdaddyplayer/images/background_white_by_themrsnowman13-d4h17rj.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 460));
 
         pack();
